@@ -3,6 +3,10 @@ import Router from 'vue-router'
 
 // Import containers
 import EntryContainer from './containers/EntryContainer.vue'
+import FindQuizContainer from './containers/FindQuizContainer.vue'
+import QuizContainer from './containers/QuizContainer.vue'
+import QuestionContainer from './containers/QuestionContainer.vue'
+import ResultContainer from './containers/ResultContainer.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -20,7 +24,7 @@ export default new Router({
       path: '/quiz/:_quiz_id',
       component: QuizContainer,
       children: [
-        { path: '', component: QuestionContainer },
+        { path: '', component: QuestionContainer, props: true },
         { path: 'result', component: ResultContainer }
       ]
     }

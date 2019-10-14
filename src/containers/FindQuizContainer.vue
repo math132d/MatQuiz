@@ -7,18 +7,18 @@
 
 <script>
 export default {
-    data: function(){
-        return {
-            inputValue: ''
-        }
-    },
-    methods:{
-        routeToQuiz: function(quiz_id){
-            if(quiz_id.length > 0){
-                this.$router.push({ name: 'quiz', params: { _quiz_id: quiz_id } })
-            }
-        }
+  data: function () {
+    return {
+      inputValue: ''
     }
+  },
+  methods: {
+    routeToQuiz: function (quizId) {
+      if (quizId.length > 0) {
+        this.$router.push({ name: 'quiz', params: { _quiz_id: quizId } })
+      }
+    }
+  }
 }
 </script>
 

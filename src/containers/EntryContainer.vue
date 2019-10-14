@@ -9,27 +9,27 @@
 </template>
 
 <script>
-import FindQuizContainer from './FindQuizContainer';
+import FindQuizContainer from './FindQuizContainer'
 
 export default {
-    data: function(){
-        return {
-            findActive: false,
-            createActive: false,
-        }
-    },
-    methods: {
-        onFindClick: function(){
-            this.findActive = !this.findActive;
-
-            if(this.createActive){
-                this.createActive = false;
-            }
-        }
-    },
-    components: {
-        FindQuizContainer
+  data: function () {
+    return {
+      findActive: false,
+      createActive: false
     }
+  },
+  methods: {
+    onFindClick: function () {
+      this.findActive = !this.findActive
+
+      if (this.createActive) {
+        this.createActive = false
+      }
+    }
+  },
+  components: {
+    FindQuizContainer
+  }
 }
 </script>
 

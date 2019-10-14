@@ -16,12 +16,12 @@ export default new Router({
       component: EntryContainer
     },
     {
-      name: 'quiz',
       path: '/quiz/:_quiz_id',
       component: QuizContainer,
+      props: true,
       children: [
-        { path: '', component: QuestionContainer, props: true },
-        { path: 'result', component: ResultContainer }
+        { name: 'quiz', path: '', component: QuestionContainer, props: true },
+        { name: 'result', path: 'result', component: ResultContainer }
       ]
     }
 

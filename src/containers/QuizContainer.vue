@@ -3,7 +3,7 @@
         <h3>QuizContainer {{_quiz_id}}</h3>
         <div class="fill aligner">
             <div v-if="isLoading || !isOk"><p>Loading</p></div>
-            <router-view v-else></router-view>
+            <router-view v-else :question="currentQuestion" :questionId="questionId"></router-view>
         </div>
     </div>
 </template>
@@ -13,6 +13,7 @@ export default {
   props: [
     '_quiz_id'
   ],
+
   data: function () {
     return {
       quiz: {},
@@ -22,6 +23,7 @@ export default {
       isOk: true
     }
   },
+
   methods: {
     nextQuestion: function () {
       // TODO push answers from current question to global answer list
@@ -39,6 +41,13 @@ export default {
       }
     }
   },
+
+  computed: {
+    currentQuestion: function(){
+      return this.quiz.questions[this.questionId]
+    }
+  },
+
   created: async function () {
     this.quiz = await this.fetchQuiz()
     this.isLoading = false

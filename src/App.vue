@@ -13,6 +13,11 @@
     margin: 0px;
   }
 
+  .material-icons{
+    transform: none;
+    transition: transform 0.15s ease-out;
+  }
+
   #app{
     font-family: Nunito;
     background-color: $background;

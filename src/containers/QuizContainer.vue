@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h3>QuizContainer {{_quiz_id}}</h3>
         <div class="fill aligner">
             <div v-if="isLoading || !isOk"><p>Loading</p></div>
-            <router-view v-else :question="currentQuestion" :questionId="questionId"></router-view>
+            <router-view v-else @next-question="nextQuestion" :question="currentQuestion" :questionId="questionId"></router-view>
         </div>
     </div>
 </template>
@@ -25,8 +24,15 @@ export default {
   },
 
   methods: {
-    nextQuestion: function () {
-      // TODO push answers from current question to global answer list
+    nextQuestion: function (answers) {
+
+      this.answers[this.questionId] = answers
+
+      if (this.questionId < this.quiz.questions.length - 1) {
+        this.questionId++
+      } else {
+        this.$router.push({ name: 'result', params: { _quiz_id: this.$props._quiz_id } })
+      }
     },
     fetchQuiz: async function () {
       const url = `questions/${this._quiz_id}.json`
@@ -43,7 +49,7 @@ export default {
   },
 
   computed: {
-    currentQuestion: function(){
+    currentQuestion: function () {
       return this.quiz.questions[this.questionId]
     }
   },

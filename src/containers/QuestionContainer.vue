@@ -5,7 +5,7 @@
           <div class="top">
             <template v-for="word in question.sentence.split(' ')" >
               <template v-if="word == '_'">
-                <question-input ref="input" :key="getInputId()" :placeholder="question.placeholders[getInputId()]" />
+                <question-input ref="input" :key="getInputId()" :placeholder="question.placeholders[getInputId()]"/>
                 {{incrementInputId()}}
               </template>
               <template v-else>
@@ -39,6 +39,7 @@ export default {
   data: function () {
     return {
       isVerified: false,
+      startTime: null,
       attempts: 4
     }
   },
@@ -49,7 +50,7 @@ export default {
   ],
 
   computed: {
-    isDone: function() {
+    isDone: function () {
       return this.isVerified || this.attempts <= 0
     }
   },
@@ -65,13 +66,16 @@ export default {
 
     verifyQuestion: function () {
       if (this.isDone) {
-        const answers = this.$refs.input.map((input) => {
-          return input.value // TODO Should be more then just the answers (includes, time to complete, attempts used, correct answers)
-        })
-        this.$emit('next-question', answers)
+        const questionResponse = {
+          answers: this.$refs.input.map((input) => { return input.value }),
+          remainingAttempts: this.attempts,
+          time: Date.now() - this.startTime
+        }
+
+        this.$emit('next-question', questionResponse)
       } else {
-        this.attempts -= 1
         this.isVerified = this.verifyInputs()
+        if(!this.isVerified) this.attempts -= 1
       }
     },
 
@@ -103,6 +107,7 @@ export default {
 
   created: function () {
     this.inputId = 0
+    this.startTime = Date.now()
   },
   beforeUpdate: function () {
     this.inputId = 0

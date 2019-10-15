@@ -2,7 +2,7 @@
     <div>
         <div class="fill aligner">
             <div v-if="isLoading || !isOk"><p>Loading</p></div>
-            <router-view v-else @next-question="nextQuestion" :question="currentQuestion" :questionId="questionId"></router-view>
+            <router-view v-else @next-question="nextQuestion" :question="currentQuestion" :questionId="questionId" ></router-view>
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   data: function () {
     return {
       quiz: {},
-      answers: [],
+      quizResponse: [],
       questionId: 0,
       isLoading: true,
       isOk: true
@@ -24,8 +24,8 @@ export default {
   },
 
   methods: {
-    nextQuestion: function (answers) {
-      this.answers[this.questionId] = answers
+    nextQuestion: function (questionResponse) {
+      this.quizResponse[this.questionId] = questionResponse
 
       if (this.questionId < this.quiz.questions.length - 1) {
         this.questionId++
@@ -57,13 +57,7 @@ export default {
     this.quiz = await this.fetchQuiz()
     this.isLoading = false
 
-    this.answers = this.quiz.questions.map((question) => {
-      return new Array(question.answers.length).fill('')
-    })
+    this.quizResponse = new Array(this.quiz.questions.length)
   }
 }
 </script>
-
-<style scoped>
-
-</style>

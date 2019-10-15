@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['placeholder'], // Defining variables passed to and used within this component
+  props: ['placeholder', 'prevResponse'], // Defining variables passed to and used within this component
   data: function () {
     return {
       validState: -1,

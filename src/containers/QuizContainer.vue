@@ -25,7 +25,6 @@ export default {
 
   methods: {
     nextQuestion: function (answers) {
-
       this.answers[this.questionId] = answers
 
       if (this.questionId < this.quiz.questions.length - 1) {

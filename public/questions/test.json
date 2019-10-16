@@ -8,6 +8,11 @@
       "sentence": "Bla bla bla _ Ik' _",
       "answers": ["bla", "os"],
       "placeholders": ["?", "?"]
+    },
+    {
+      "sentence": "Du er lidt en _",
+      "answers": ["ged"],
+      "placeholders": ["goat"]
     }
   ]
 }

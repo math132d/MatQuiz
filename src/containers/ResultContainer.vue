@@ -11,12 +11,17 @@
                 </defs>
                 <circle cx="64" cy="64" r="45" transform="rotate(-90, 64, 64)"/>
                 <circle :style="{'stroke-dashoffset': dashOffset}" class="rating" style="" cx="64" cy="64" r="45" transform="rotate(90, 64, 64)"/>
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" >B</text>
+                <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" >B+</text>
             </svg>
             <p>Attempts <br> Remaining</p>
         </div>
         <div class="right">
-            RIGHT
+            <div>
+                <p class="highscore"><span class="badge">1</span> FASTEST QUESTION</p>
+            </div>
+            <div>
+                <p class="highscore"><span class="badge">2</span> MOST MISTAKES</p>
+            </div>
         </div>
     </div>
 </template>
@@ -35,14 +40,30 @@ export default {
   methods: {
     getDashOffset: function () {
       let maxAttempts = this.quiz.questions.length * 4
-      console.log(maxAttempts)
       let remainingAttempts = this.quizResponses.reduce((total, current) => {
         return total + current.remainingAttempts
       }, 0)
-      console.log(remainingAttempts)
 
       return 330 - ((remainingAttempts / maxAttempts) * 330)
+    },
+    getAttemptRatio: function(){
+        let maxAttempts = this.quiz.questions.length * 4
+        let remainingAttempts = this.quizResponses.reduce((total, current) => {
+            return total + current.remainingAttempts
+        }, 0)
+
+        return {
+            maxAttempts,
+            remainingAttempts
+        }
     }
+  },
+
+  computed: {
+
+      getGrade: function(){
+
+      }
   },
 
   created: function () {
@@ -79,11 +100,7 @@ export default {
     }
 
     .container .left h2 {
-<<<<<<< HEAD
         font-weight: 800;
-=======
-        font-weight: 700;
->>>>>>> 1b6bb0d21b86e8f1008e70a131162f5478372e27
     }
 
     .container .left p {
@@ -93,6 +110,11 @@ export default {
     }
 
     .container .right{
+        display: flex;
+        flex-direction: column;
+
+        padding: 20px;
+
         align-self: stretch;
         flex-grow: 1;
 
@@ -101,8 +123,10 @@ export default {
         border-left: none;
 
         border-radius: 0 3px 3px 0;
+    }
 
-        text-align: right;
+    .container .right div {
+        flex-grow: 1;
     }
 
     .grade-visual {
@@ -137,4 +161,30 @@ export default {
         font-size: 2.5rem;
     }
 
+    .highscore {
+      color: $text;
+      font-size: 0.7rem;
+      vertical-align: middle;
+
+      user-select: none;
+
+      margin: 5px;
+
+      transition: all 0.15s ease-out;
+    }
+
+    .highscore .badge {
+      display: inline-block;
+      color: $background;
+      background: $text;
+
+      line-height: 1rem;
+
+      width: 1rem; height: 1rem;
+      border-radius: 50%;
+
+      font-size: 0.7rem;
+      text-align: center;
+      font-weight: bold;
+    }
 </style>

@@ -79,7 +79,7 @@ export default {
     }
 
     .container .left h2 {
-        font-weight: bold;
+        font-weight: 700;
     }
 
     .container .left p {

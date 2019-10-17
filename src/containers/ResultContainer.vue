@@ -11,9 +11,15 @@
                 </defs>
                 <circle cx="64" cy="64" r="45" transform="rotate(-90, 64, 64)"/>
                 <circle :style="{'stroke-dashoffset': dashOffset}" class="rating" style="" cx="64" cy="64" r="45" transform="rotate(90, 64, 64)"/>
-                <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" >B+</text>
+                <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" >{{grade}}</text>
             </svg>
-            <p>Attempts <br> Remaining</p>
+            <p>
+                <strong>
+                    {{ `${attemptRatio.remainingAttempts} / ${attemptRatio.maxAttempts}` }}
+                </strong> <br>
+                Attempts <br>
+                Remaining
+            </p>
         </div>
         <div class="right">
             <div>
@@ -33,37 +39,37 @@ export default {
     return {
       quiz: this.$parent.quiz,
       quizResponses: this.$parent.quizResponse,
-      dashOffset: 330
+      dashOffset: 283
     }
   },
 
   methods: {
     getDashOffset: function () {
+      let {maxAttempts, remainingAttempts} = this.attemptRatio
+      return 283 - ((remainingAttempts / maxAttempts) * 283)
+    }
+  },
+
+  computed: {
+    grade: function () {
+        const {maxAttempts, remainingAttempts} = this.attemptRatio
+        const percent = remainingAttempts/maxAttempts
+        const grades = ['A+', 'A', 'B+', 'B', 'C', 'D', 'F']
+        const step = 6 - Math.floor(Math.pow(percent, 3)*6)
+
+        return grades[step]
+    },
+    attemptRatio: function () {
       let maxAttempts = this.quiz.questions.length * 4
       let remainingAttempts = this.quizResponses.reduce((total, current) => {
         return total + current.remainingAttempts
       }, 0)
 
-      return 330 - ((remainingAttempts / maxAttempts) * 330)
-    },
-    getAttemptRatio: function(){
-        let maxAttempts = this.quiz.questions.length * 4
-        let remainingAttempts = this.quizResponses.reduce((total, current) => {
-            return total + current.remainingAttempts
-        }, 0)
-
-        return {
-            maxAttempts,
-            remainingAttempts
-        }
-    }
-  },
-
-  computed: {
-
-      getGrade: function(){
-
+      return {
+        maxAttempts,
+        remainingAttempts
       }
+    }
   },
 
   created: function () {
@@ -150,8 +156,8 @@ export default {
     .grade-visual .rating {
         filter: drop-shadow(0 0 5px $positive);
         stroke-width: 16px;
-        stroke-dasharray: 330 330;
-        stroke-dashoffset: 330;
+        stroke-dasharray: 283 283;
+        stroke-dashoffset: 283;
 
         transition: stroke-dashoffset 2.5s ease-in-out;
     }

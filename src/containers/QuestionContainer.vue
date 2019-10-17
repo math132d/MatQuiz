@@ -75,7 +75,7 @@ export default {
         this.$emit('next-question', questionResponse)
       } else {
         this.isVerified = this.verifyInputs()
-        if(!this.isVerified) this.attempts -= 1
+        if (!this.isVerified) this.attempts -= 1
       }
     },
 

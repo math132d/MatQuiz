@@ -9,7 +9,12 @@
                 {{incrementInputId()}}
               </template>
               <template v-else>
-                {{word}}
+                <template v-if="word === '\n'">
+                  <br>
+                </template>
+                <template v-else>
+                  {{word}}
+                </template>
               </template>
             </template>
           </div>

@@ -23,17 +23,24 @@
         </div>
         <div class="right">
             <div>
-                <p class="highscore"><span class="badge">1</span> FASTEST QUESTION</p>
-                <p>{{getLongestTime()}}</p>
+                <p class="hs-display"><span class="badge">1</span> COMPLETION TIME </p>
+                <h3 class="time-display" >{{quizDuration()}}s</h3>
             </div>
             <div>
-                <p class="highscore"><span class="badge">2</span> MOST MISTAKES</p>
+                <p class="hs-display"><span class="badge">2</span> STATS</p>
+                <div class="answer-stats">
+                    <div class="correct" >  {{getAnswerStats().correct}}    <p>Correct</p>      </div>
+                    <div class="incorrect"> {{getAnswerStats().incorrect}}  <p>Incorrect</p>    </div>
+                    <div>                   {{getAnswerStats().unanswered}}    <p>Unanswered</p>   </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import tools from '../lib/tools.js'
+
 export default {
 
   data: function () {
@@ -46,36 +53,51 @@ export default {
 
   methods: {
     getDashOffset: function () {
-      let {maxAttempts, remainingAttempts} = this.attemptRatio
+      let { maxAttempts, remainingAttempts } = this.attemptRatio
       return 283 - ((remainingAttempts / maxAttempts) * 283)
     },
 
-    getLongestTime: function(){
-      let time = 0
-      let id = 0
+    getAnswerStats: function(){
+        let unanswered = 0;
+        let correct = 0;
+        let incorrect = 0;
 
-      this.quizResponses.forEach((element, index) => {
-        if(element.time > time){
-          time = element.time
-          id = index
+        this.quizResponses.forEach((response, questionIndex) => {
+            response.answers.forEach((responseAnswer, responseIndex) => {
+                if(responseAnswer === ''){
+                    unanswered++
+                } else if (responseAnswer === this.quiz.questions[questionIndex].answers[responseIndex]){
+                    correct++;
+                } else {
+                    incorrect++;
+                }
+            })
+        })
+
+        return {
+            correct,
+            incorrect,
+            unanswered
         }
-      });
+    },
 
-      return {
-        questionId: id,
-        time
-      }
+    quizDuration: function(){
+        const duration = this.quizResponses.reduce((result, current) => {
+            return result+current.time
+        }, 0)
+
+        return tools.formatSeconds(Math.round(duration/1000))
     }
   },
 
   computed: {
     grade: function () {
-        const {maxAttempts, remainingAttempts} = this.attemptRatio
-        const percent = remainingAttempts/maxAttempts
-        const grades = ['A+', 'A', 'B+', 'B', 'C', 'D', 'F']
-        const step = 6 - Math.floor(Math.pow(percent, 3)*6)
+      const { maxAttempts, remainingAttempts } = this.attemptRatio
+      const percent = remainingAttempts / maxAttempts
+      const grades = ['A+', 'A', 'B+', 'B', 'C', 'D', 'F']
+      const step = 6 - Math.floor(Math.pow(percent, 3) * 6)
 
-        return grades[step]
+      return grades[step]
     },
     attemptRatio: function () {
       let maxAttempts = this.quiz.questions.length * 4
@@ -185,7 +207,7 @@ export default {
         font-size: 2.5rem;
     }
 
-    .highscore {
+    .hs-display {
       color: $text;
       font-size: 0.7rem;
       vertical-align: middle;
@@ -197,7 +219,14 @@ export default {
       transition: all 0.15s ease-out;
     }
 
-    .highscore .badge {
+    .time-display {
+        color: lighten($text, 40%);
+        font-size: 2rem;
+        margin-top: 0.6rem;
+        margin-left: 2rem;
+    }
+
+    .hs-display .badge {
       display: inline-block;
       color: $background;
       background: $text;
@@ -210,5 +239,40 @@ export default {
       font-size: 0.7rem;
       text-align: center;
       font-weight: bold;
+    }
+
+    .answer-stats {
+        display: flex;
+        margin-top: 0.6rem;
+        margin-left: 2rem
+    }
+
+    .answer-stats div {
+        color: lighten($text, 40%);
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 800;
+    }
+
+    .answer-stats .correct {
+        color: $positive;
+    }
+
+    .answer-stats .incorrect {
+        color: $negative;
+    }
+
+    .answer-stats div p {
+        font-size: 0.6rem;
+        margin-top: -0.5rem;
+        font-weight: lighter;
+    }
+
+    .answer-stats .correct p {
+        color: darken($positive, 20%)
+    }
+
+    .answer-stats .incorrect p {
+        color: darken($negative, 20%)
     }
 </style>

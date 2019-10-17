@@ -96,6 +96,7 @@ export default {
 
   watch: {
     questionId: function () {
+      this.startTime = Date.now()
       this.isVerified = false
       this.attempts = 4
     }

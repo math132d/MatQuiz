@@ -24,6 +24,7 @@
         <div class="right">
             <div>
                 <p class="highscore"><span class="badge">1</span> FASTEST QUESTION</p>
+                <p>{{getLongestTime()}}</p>
             </div>
             <div>
                 <p class="highscore"><span class="badge">2</span> MOST MISTAKES</p>
@@ -47,6 +48,23 @@ export default {
     getDashOffset: function () {
       let {maxAttempts, remainingAttempts} = this.attemptRatio
       return 283 - ((remainingAttempts / maxAttempts) * 283)
+    },
+
+    getLongestTime: function(){
+      let time = 0
+      let id = 0
+
+      this.quizResponses.forEach((element, index) => {
+        if(element.time > time){
+          time = element.time
+          id = index
+        }
+      });
+
+      return {
+        questionId: id,
+        time
+      }
     }
   },
 

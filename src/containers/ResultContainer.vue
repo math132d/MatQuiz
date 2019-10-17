@@ -57,36 +57,36 @@ export default {
       return 283 - ((remainingAttempts / maxAttempts) * 283)
     },
 
-    getAnswerStats: function(){
-        let unanswered = 0;
-        let correct = 0;
-        let incorrect = 0;
+    getAnswerStats: function () {
+      let unanswered = 0
+      let correct = 0
+      let incorrect = 0
 
-        this.quizResponses.forEach((response, questionIndex) => {
-            response.answers.forEach((responseAnswer, responseIndex) => {
-                if(responseAnswer === ''){
-                    unanswered++
-                } else if (responseAnswer === this.quiz.questions[questionIndex].answers[responseIndex]){
-                    correct++;
-                } else {
-                    incorrect++;
-                }
-            })
+      this.quizResponses.forEach((response, questionIndex) => {
+        response.answers.forEach((responseAnswer, responseIndex) => {
+          if (responseAnswer === '') {
+            unanswered++
+          } else if (responseAnswer === this.quiz.questions[questionIndex].answers[responseIndex]) {
+            correct++
+          } else {
+            incorrect++
+          }
         })
+      })
 
-        return {
-            correct,
-            incorrect,
-            unanswered
-        }
+      return {
+        correct,
+        incorrect,
+        unanswered
+      }
     },
 
-    quizDuration: function(){
-        const duration = this.quizResponses.reduce((result, current) => {
-            return result+current.time
-        }, 0)
+    quizDuration: function () {
+      const duration = this.quizResponses.reduce((result, current) => {
+        return result + current.time
+      }, 0)
 
-        return tools.formatSeconds(Math.round(duration/1000))
+      return tools.formatSeconds(Math.round(duration / 1000))
     }
   },
 

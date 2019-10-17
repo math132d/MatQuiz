@@ -3,7 +3,7 @@
       <transition mode="out-in" name="question">
         <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
           <div class="top">
-            <template v-for="word in question.sentence.split(' ')" >
+            <template v-for="word in question.sentence.split(' ')" > <!-- Halp. How to do this in a better way -->
               <template v-if="word == '_'">
                 <question-input ref="input" :key="getInputId()" :placeholder="question.placeholders[getInputId()]"/>
                 {{incrementInputId()}}
@@ -19,7 +19,7 @@
             </template>
           </div>
           <div class="bottom">
-            <a class="attempts" :class="{warning : (attempts <= 2)}"><span class="badge">{{attempts}}</span> Attempts</a>
+            <a class="attempts" :class="{warning : (attempts <= 1)}"><span class="badge">{{attempts}}</span> Attempts</a>
             <button type="submit" class="verify" >
               <template v-if="isDone" >
                 <i class="material-icons">arrow_forward</i>
@@ -45,7 +45,7 @@ export default {
     return {
       isVerified: false,
       startTime: null,
-      attempts: 4
+      attempts: 3
     }
   },
 
@@ -84,7 +84,7 @@ export default {
       }
     },
 
-    verifyInputs: function () { // Returns true if all unputs are corret, false otherwise
+    verifyInputs: function () { // Returns true if all unputs are correct, false otherwise
       let questionValid = true
 
       this.$refs.input.forEach((component, index) => {
@@ -103,7 +103,7 @@ export default {
     questionId: function () {
       this.startTime = Date.now()
       this.isVerified = false
-      this.attempts = 4
+      this.attempts = (this.question.answers.length > 1) ? this.question.answers.length : 2
     }
   },
 
@@ -113,6 +113,7 @@ export default {
 
   created: function () {
     this.inputId = 0
+    this.attempts = (this.question.answers.length > 1) ? this.question.answers.length : 2
     this.startTime = Date.now()
   },
   beforeUpdate: function () {

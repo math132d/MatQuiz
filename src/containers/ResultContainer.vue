@@ -100,7 +100,12 @@ export default {
       return grades[step]
     },
     attemptRatio: function () {
-      let maxAttempts = this.quiz.questions.length * 4
+      let maxAttempts = this.quiz.questions.reduce((total, current) => {
+        let attempts = (current.answers.length > 1) ? current.answers.length : 2
+        console.log(attempts)
+        return total + attempts
+      }, 0)
+
       let remainingAttempts = this.quizResponses.reduce((total, current) => {
         return total + current.remainingAttempts
       }, 0)

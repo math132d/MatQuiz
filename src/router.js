@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       name: 'entry',
-      path: '/home',
+      path: '',
       component: EntryContainer
     },
     {

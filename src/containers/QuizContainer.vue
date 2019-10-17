@@ -30,7 +30,7 @@ export default {
       if (this.questionId < this.quiz.questions.length - 1) {
         this.questionId++
       } else {
-        this.$router.push({ name: 'result', params: { _quiz_id: this.$props._quiz_id } })
+        this.$router.replace({ name: 'result', params: { _quiz_id: this.$props._quiz_id } })
       }
     },
     fetchQuiz: async function () {

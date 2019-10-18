@@ -7,7 +7,7 @@
           type="text"
           v-model="value"
 
-          :style="{width: (inputWidth+2) 'ch'}"
+          :style="{width: (inputWidth+2) + 'ch'}"
 
           :placeholder="placeholder"
           :valid="isValid"

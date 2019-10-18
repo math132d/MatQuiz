@@ -1,6 +1,6 @@
 {"questions": [
     {
-      "sentence": "Hun _ chokoladeboller og bolsjer og _ så hjem. Men der var temmelig lang vej, og chokoladebollerne _ så dejligt, at Anette kom til at spise _ .",
+      "sentence": "Hun _ chokoladeboller og bolsjer og _ så hjem. Men der var temmelig lang vej, og chokoladebollerne _ så dejligt, at Anette kom til at spise _.",
       "answers": ["købte", "gik", "smagte", "dem alle"],
       "placeholders": ["bought", "went", "tasted", "all of them"]
     },

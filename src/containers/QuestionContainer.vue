@@ -3,19 +3,9 @@
       <transition mode="out-in" name="question">
         <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
           <div class="top">
-            <template v-for="word in question.sentence.split(' ')" > <!-- Halp. How to do this in a better way -->
-              <template v-if="word == '_'">
-                <question-input ref="input" :key="getInputId()" :placeholder="question.placeholders[getInputId()]"/>
-                {{incrementInputId()}}
-              </template>
-              <template v-else>
-                <template v-if="word === '\n'">
-                  <br>
-                </template>
-                <template v-else>
-                  {{word}}
-                </template>
-              </template>
+            <template v-for="(chunk, index) in question.sentence.split('_')" > <!-- Halp. How to do this in a better way -->
+              <question-input v-if="index > 0" ref="input" :key="index" :placeholder="question.placeholders[index-1]"/>
+              {{chunk}}
             </template>
           </div>
           <div class="bottom">

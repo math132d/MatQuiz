@@ -66,7 +66,7 @@ export default {
         response.answers.forEach((responseAnswer, responseIndex) => {
           if (responseAnswer === '') {
             unanswered++
-          } else if (responseAnswer === this.quiz.questions[questionIndex].answers[responseIndex]) {
+          } else if (tools.compareStrings(responseAnswer,this.quiz.questions[questionIndex].answers[responseIndex])) {
             correct++
           } else {
             incorrect++

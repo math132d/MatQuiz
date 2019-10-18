@@ -26,6 +26,7 @@
 
 <script>
 import QuestionInput from '../components/QuestionInput'
+import tools from '../lib/tools'
 
 export default {
 
@@ -78,7 +79,7 @@ export default {
       let questionValid = true
 
       this.$refs.input.forEach((component, index) => {
-        const inputValid = component.value.toLowerCase() === this.question.answers[index]
+        const inputValid = tools.compareStrings(component.value, this.question.answers[index])
 
         if (!inputValid) { questionValid = false }
 

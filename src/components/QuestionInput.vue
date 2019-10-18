@@ -1,19 +1,29 @@
 <template>
     <span class="input-container">
 
-        <input 
-          class="inline-input"
-          name="answer"
-          type="text"
-          v-model="value"
+        <transition name="fade" mode="out-in">
+          <p v-if="isDone && !isValid" class="answer" :style="{width: (inputWidth+2) + 'ch'}">
+            <span>
+              {{firstAnswer}}
+            </span>
+          </p>
 
-          :style="{width: (inputWidth+2) + 'ch'}"
+          <input
+            class="inline-input"
+            name="answer"
+            type="text"
 
-          :placeholder="placeholder"
-          :valid="isValid"
-          :invalid="isValid==false"
-          :disabled="isLocked"
-        />
+            v-else
+            v-model="value"
+
+            :style="{width: (inputWidth+2) + 'ch'}"
+
+            :placeholder="placeholder"
+            :valid="isValid"
+            :invalid="isValid==false"
+            :disabled="isValid || isDone"
+          />
+        </transition>
 
         <svg preserveAspectRatio="none" viewBox="0 0 32 7" class="underline">
           <line x1="1" y1="4" x2="31" y2="4"/>
@@ -27,11 +37,10 @@
 
 <script>
 export default {
-  props: ['placeholder', 'answer'], // Defining variables passed to and used within this component
+  props: ['placeholder', 'answer', 'isDone'], // Defining variables passed to and used within this component
   data: function () {
     return {
       validState: -1,
-      isLocked: false,
       value: ''
     }
   },
@@ -50,6 +59,9 @@ export default {
     },
     inputWidth: function(){
       return (this.$props.placeholder.length > this.$props.answer.length) ? this.placeholder.length : this.answer.length
+    },
+    firstAnswer: function(){
+      return Array.isArray(this.answer) ? this.answer[0] : this.answer
     }
   }
 }
@@ -59,12 +71,11 @@ export default {
     @import 'src/assets/scss/const.scss';
 
     input{
+        display: inline-block;
         font-family: Nunito;
         font-size: 1.2rem;
         text-align: center;
         color: $text;
-
-        margin: 0px 2px;
 
         background-color: transparent;
 
@@ -81,6 +92,30 @@ export default {
     .inline-input[invalid] ~ .underline .incorrect{
         stroke-dasharray: 30, 30;
         stroke-dashoffset: 0;
+    }
+
+    .answer {
+      display: inline-block;
+      font-family: Nunito;
+      font-size: 1.2rem;
+
+      text-align: center;
+      vertical-align: baseline;
+      
+      color: $background;
+    }
+
+    .answer span {
+      display: inline-block;
+      background-color: $negative;
+      border-radius: 3px 3px 0 0;
+
+      font-style: italic;
+      padding: 0 4px;
+
+      line-height: 115%;
+
+      transition: height 0.2s ease-out;
     }
 
     .input-container{
@@ -138,4 +173,14 @@ export default {
         transition: all 0.2s;
         transition-timing-function: ease-out;
     }
+
+    // TRANSITIONS
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .25s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+
 </style>

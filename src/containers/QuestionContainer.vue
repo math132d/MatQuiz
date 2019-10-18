@@ -9,6 +9,7 @@
                 ref="input"
 
                 :key="index"
+                :isDone="isDone"
                 :placeholder="question.placeholders[index-1]"
                 :answer="question.answers[index-1]"
               />

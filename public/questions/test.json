@@ -11,7 +11,7 @@
     },
     {
       "sentence": "Du er lidt en _",
-      "answers": ["ged"],
+      "answers": [["ged", "lam"]],
       "placeholders": ["goat"]
     }
   ]

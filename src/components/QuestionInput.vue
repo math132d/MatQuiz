@@ -57,10 +57,10 @@ export default {
         return null // And null if it has not yet been modified
       }
     },
-    inputWidth: function(){
+    inputWidth: function () {
       return (this.$props.placeholder.length > this.$props.answer.length) ? this.placeholder.length : this.answer.length
     },
-    firstAnswer: function(){
+    firstAnswer: function () {
       return Array.isArray(this.answer) ? this.answer[0] : this.answer
     }
   }
@@ -101,7 +101,7 @@ export default {
 
       text-align: center;
       vertical-align: baseline;
-      
+
       color: $background;
     }
 

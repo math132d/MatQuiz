@@ -60,7 +60,6 @@ export default {
     .inline-input[invalid] ~ .underline .incorrect{
         stroke-dasharray: 30, 30;
         stroke-dashoffset: 0;
-        opacity: 1;
     }
 
     .input-container{
@@ -81,10 +80,10 @@ export default {
     }
 
     .underline .focus{
-        opacity: 0;
-
         stroke-dasharray: 0, 100;
         stroke-dashoffset: -15;
+
+        opacity: 1.0;
 
         transition: all 0.2s;
         transition-timing-function: ease-out;
@@ -92,12 +91,13 @@ export default {
 
     .underline .correct{
         stroke: $positive;
-        opacity: 0;
 
         stroke-width: 4px;
 
         stroke-dasharray: 0, 100;
         stroke-dashoffset: -15;
+
+        opacity: 1.0;
 
         transition: all 0.2s;
         transition-timing-function: ease-out;
@@ -111,6 +111,8 @@ export default {
 
         stroke-dasharray: 0, 100;
         stroke-dashoffset: -15;
+
+        opacity: 1.0;
 
         transition: all 0.2s;
         transition-timing-function: ease-out;

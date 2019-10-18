@@ -55,6 +55,10 @@ export default {
         border-radius: 3px;
     }
 
+    .inline-input:focus {
+      outline: none;
+    }
+
     .inline-input:focus ~ .underline .focus,
     .inline-input[valid] ~ .underline .correct,
     .inline-input[invalid] ~ .underline .incorrect{

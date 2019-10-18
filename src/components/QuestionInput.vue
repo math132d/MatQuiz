@@ -1,21 +1,37 @@
 <template>
     <span class="input-container">
-        <input class="inline-input" v-model="value" :placeholder="placeholder" :valid="isValid" :disabled="isValid" :invalid="isValid==false" type="text" name="answer" />
+
+        <input 
+          class="inline-input"
+          name="answer"
+          type="text"
+          v-model="value"
+
+          :style="{width: (inputWidth+2) 'ch'}"
+
+          :placeholder="placeholder"
+          :valid="isValid"
+          :invalid="isValid==false"
+          :disabled="isLocked"
+        />
+
         <svg preserveAspectRatio="none" viewBox="0 0 32 7" class="underline">
           <line x1="1" y1="4" x2="31" y2="4"/>
           <line x1="1" y1="4" x2="31" y2="4" class="focus"/>
           <line x1="1" y1="4" x2="31" y2="4" class="correct"/>
           <line x1="1" y1="4" x2="31" y2="4" class="incorrect"/>
         </svg>
+
       </span>
 </template>
 
 <script>
 export default {
-  props: ['placeholder', 'prevResponse'], // Defining variables passed to and used within this component
+  props: ['placeholder', 'answer'], // Defining variables passed to and used within this component
   data: function () {
     return {
       validState: -1,
+      isLocked: false,
       value: ''
     }
   },
@@ -31,6 +47,9 @@ export default {
       } else {
         return null // And null if it has not yet been modified
       }
+    },
+    inputWidth: function(){
+      return (this.$props.placeholder.length > this.$props.answer.length) ? this.placeholder.length : this.answer.length
     }
   }
 }
@@ -46,8 +65,6 @@ export default {
         color: $text;
 
         margin: 0px 2px;
-
-        max-width: 6rem;
 
         background-color: transparent;
 

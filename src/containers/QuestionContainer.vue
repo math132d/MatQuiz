@@ -3,8 +3,15 @@
       <transition mode="out-in" name="question">
         <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
           <div class="top">
-            <template v-for="(chunk, index) in question.sentence.split('_')" > <!-- Halp. How to do this in a better way -->
-              <question-input v-if="index > 0" ref="input" :key="index" :placeholder="question.placeholders[index-1]"/>
+            <template v-for="(chunk, index) in question.sentence.split('_')" >
+              <question-input
+                v-if="index > 0"
+                ref="input"
+
+                :key="index"
+                :placeholder="question.placeholders[index-1]"
+                :answer="question.answers[index-1]"
+              />
               {{chunk}}
             </template>
           </div>

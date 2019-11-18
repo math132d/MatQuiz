@@ -60,14 +60,6 @@ export default {
   },
 
   methods: {
-    getInputId: function () {
-      return this.inputId
-    },
-
-    incrementInputId: function () {
-      this.inputId++
-    },
-
     verifyQuestion: function () {
       if (this.isDone) {
         const questionResponse = {

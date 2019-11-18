@@ -33,6 +33,7 @@ export default {
         this.$router.replace({ name: 'result', params: { _quiz_id: this.$props._quiz_id } })
       }
     },
+    
     fetchQuiz: async function () {
       const url = `questions/${this._quiz_id}.json`
       console.log(`Fetching quiz from: ${url}`)

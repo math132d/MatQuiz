@@ -51,16 +51,16 @@ export default {
   },
   computed: {
     isValid: function () {
-      if (this.validState >= 0) {
-        return this.validState === 1 // Return the state if it is set
+      if (this.validState >= 0) { //Has the input been modified? 
+        return this.validState === 1 // Returns the valid state true : false
       } else {
-        return null // And null if it has not yet been modified
+        return null // Returns null if unmodified
       }
     },
-    inputWidth: function () {
+    inputWidth: function () { //Returns the length of either the placeholder or the answer, whichever is longest
       return (this.$props.placeholder.length > this.$props.answer.length) ? this.placeholder.length : this.answer.length
     },
-    firstAnswer: function () {
+    firstAnswer: function () { //Returns the first correct answer if there are multiple correct answers
       return Array.isArray(this.answer) ? this.answer[0] : this.answer
     }
   }
@@ -179,7 +179,7 @@ export default {
     .fade-enter-active, .fade-leave-active {
       transition: opacity .25s;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    .fade-enter, .fade-leave-to {
       opacity: 0;
     }
 

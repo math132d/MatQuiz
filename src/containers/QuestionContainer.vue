@@ -60,10 +60,11 @@ export default {
   methods: {
     verifyQuestion: function () {
       if (this.isDone) {
-        const questionResponse = {
-          answers: this.$refs.input.map((input) => { return input.value }),
+
+        const questionResponse = { //response data to be stored for grading
+          answers: this.$refs.input.map((input) => { return input.value }), //Users answers
           remainingAttempts: this.attempts,
-          time: Date.now() - this.startTime
+          time: Date.now() - this.startTime //Time spent on question
         }
 
         this.$emit('next-question', questionResponse)
@@ -105,6 +106,7 @@ export default {
     this.attempts = (this.question.answers.length > 1) ? this.question.answers.length : 2
     this.startTime = Date.now()
   },
+  
   beforeUpdate: function () {
     this.inputId = 0
   }

@@ -1,13 +1,26 @@
 <template>
-    <div>
-        <div class="fill aligner">
-            <div v-if="isLoading || !isOk"><p>Loading</p></div>
-            <router-view v-else @next-question="nextQuestion" :question="currentQuestion" :questionId="questionId" ></router-view>
-        </div>
-    </div>
+  <div class="fill aligner aligner--col aligner--space">
+    <div class="name container container--top px-4" >{{ _quiz_id.replace(/_/g, " ") }}</div>
+
+      <div v-if="isLoading || !isOk"><p>Loading</p></div>
+      <question-container v-else @next-question="nextQuestion" :question="currentQuestion" :questionId="questionId" ></question-container>
+      
+      <div class="aligner aligner--row" style="padding: 8px;">
+        <button class="verifyer aligner button button-primary" style="margin-right: 16px;">
+          <div class="aligner aligner--col">
+            <p class="primary" >VERIFY ANSWERS</p>
+            <p class="secondary" ><strong>5</strong> Attempts Remaining</p>
+          </div>
+          <i class="material-icons">done</i>
+        </button>
+        <button class="aligner button button-secondary" ><i class="material-icons">arrow_forward</i></button>
+      </div>
+  </div>
 </template>
 
 <script>
+import QuestionContainer from "../containers/QuestionContainer"
+
 export default {
   props: [
     '_quiz_id'
@@ -33,7 +46,6 @@ export default {
         this.$router.replace({ name: 'result', params: { _quiz_id: this.$props._quiz_id } })
       }
     },
-    
     fetchQuiz: async function () {
       const url = `questions/${this._quiz_id}.json`
       console.log(`Fetching quiz from: ${url}`)
@@ -54,6 +66,10 @@ export default {
     }
   },
 
+  components: {
+    QuestionContainer
+  },
+
   created: async function () {
     this.quiz = await this.fetchQuiz()
     this.isLoading = false
@@ -62,3 +78,29 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .name {
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+
+  .verifyer .aligner {
+    align-items: flex-start;
+    line-height: 1.1;
+    margin: 8px;
+  }
+
+  .verifyer .primary {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  .verifyer .secondary {
+    font-size: 0.875rem;
+  }
+
+  .verifyer .secondary strong{
+    font-weight: 600;
+  }
+</style>

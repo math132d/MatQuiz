@@ -1,34 +1,32 @@
 <template>
     <div>
-      <transition mode="out-in" name="question">
-        <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
-          <div class="top">
-            <template v-for="(chunk, index) in question.sentence.split('_')" >
-              <question-input
-                v-if="index > 0"
-                ref="input"
+      <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
+        <div class="top">
+          <template v-for="(chunk, index) in question.sentence.split('_')" >
+            <question-input
+              v-if="index > 0"
+              ref="input"
 
-                :key="index"
-                :isDone="isDone"
-                :placeholder="question.placeholders[index-1]"
-                :answer="question.answers[index-1]"
-              />
-              {{chunk}}
+              :key="index"
+              :isDone="isDone"
+              :placeholder="question.placeholders[index-1]"
+              :answer="question.answers[index-1]"
+            />
+            {{chunk}}
+          </template>
+        </div>
+        <div class="bottom">
+          <a class="attempts" :class="{warning : (attempts <= 1)}"><span class="badge">{{attempts}}</span> Attempts</a>
+          <button type="submit" class="verify" >
+            <template v-if="isDone" >
+              <i class="material-icons">arrow_forward</i>
             </template>
-          </div>
-          <div class="bottom">
-            <a class="attempts" :class="{warning : (attempts <= 1)}"><span class="badge">{{attempts}}</span> Attempts</a>
-            <button type="submit" class="verify" >
-              <template v-if="isDone" >
-                <i class="material-icons">arrow_forward</i>
-              </template>
-              <template v-else >
-                <i class="material-icons">done</i>
-              </template>
-            </button>
-          </div>
-        </form>
-      </transition>
+            <template v-else >
+              <i class="material-icons">done</i>
+            </template>
+          </button>
+        </div>
+      </form>
    </div>
 </template>
 

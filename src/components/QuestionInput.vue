@@ -73,7 +73,7 @@ export default {
     input{
         display: inline-block;
         font-family: Nunito;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         text-align: center;
         color: $text;
 
@@ -97,7 +97,7 @@ export default {
     .answer {
       display: inline-block;
       font-family: Nunito;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
 
       text-align: center;
       vertical-align: baseline;
@@ -107,11 +107,11 @@ export default {
 
     .answer span {
       display: inline-block;
-      background-color: $negative;
+      background:linear-gradient(to right, $warning-600, $warning-500);
       border-radius: 3px 3px 0 0;
 
       font-style: italic;
-      padding: 0 4px;
+      padding: 0 6px;
 
       line-height: 115%;
 
@@ -125,7 +125,7 @@ export default {
     .underline {
         position: absolute; left: 0px; bottom: 0px;
         width: 100%;
-        height: 2px;
+        height: 4px;
     }
 
     .underline line {
@@ -146,7 +146,7 @@ export default {
     }
 
     .underline .correct{
-        stroke: $positive;
+        stroke: $primary-600;
 
         stroke-width: 4px;
 
@@ -160,7 +160,7 @@ export default {
     }
 
     .underline .incorrect{
-        stroke: $negative;
+        stroke: $warning-600;
         opacity: 0;
 
         stroke-width: 4px;

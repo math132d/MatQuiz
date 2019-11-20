@@ -1,8 +1,9 @@
 <template>
   <div class="fill aligner aligner--col aligner--space">
 
-    <div class="name container container--top px-4" >
-      {{ _quiz_id.replace(/_/g, " ") }}
+    <div class="name container container--top px-2 aligner aligner--row aligner--space" >
+      <span>{{ `${this.questionId} / ${this.quiz.questions.length-1}` }}</span>
+      <span style="margin-left: 24px"> {{ _quiz_id.replace(/_/g, " ") }} </span>
     </div>
 
     <div v-if="isLoading || !isOk"><p>Loading</p></div>
@@ -22,16 +23,18 @@
     <div class="aligner aligner--row" style="padding: 8px;">
 
       <!-- Verifyes the question-->
-      <button @click="verifyQuestion" class="verifyer aligner button button-primary" style="margin-right: 16px;" >
+      <button @click="verifyQuestion" class="verifyer aligner button" :class="{'button-primary': isVerified!==0, 'button-warning': isVerified===0}" :disabled="isVerified===1" style="margin-right: 16px;" >
         <div class="aligner aligner--col">
           <p class="primary" >VERIFY ANSWERS</p>
           <p class="secondary" ><strong> {{ attempts }} </strong> Attempts Remaining</p>
         </div>
-        <i class="material-icons">done</i>
+        <i v-if="isVerified === -1" class="material-icons">done</i>
+        <i v-else-if="isVerified === 0" class="material-icons">warning</i>
+        <i v-else class="material-icons">done_all</i>
       </button>
 
       <!-- Goes to next question-->
-      <button @click="nextQuestion" class="aligner button button-secondary" >
+      <button @click="nextQuestion" class="aligner button" :class="{'button-primary': isVerified===1, 'button-secondary': isVerified!==1}" >
         <i class="material-icons">arrow_forward</i>
       </button>
 
@@ -56,7 +59,7 @@ export default {
       isLoading: true,
       isOk: true,
 
-      isVerified: false,
+      isVerified: -1, // -1 Not yet modified, 0 Not all answers are correct, 1 All answers are correct
       startTime: null,
       attempts: 3,
 
@@ -67,7 +70,7 @@ export default {
   methods: {
     nextQuestion: function () {
       const questionResponse = { // response data to be stored for grading
-        answers: this.tmpResponse, //Updated in "onVerifyResponse"
+        answers: this.tmpResponse, // Updated in "onVerifyResponse"
         remainingAttempts: this.attempts,
         time: Date.now() - this.startTime // Time spent on question
       }
@@ -90,7 +93,7 @@ export default {
 
     initQuestion: function () {
       this.startTime = Date.now()
-      this.isVerified = false
+      this.isVerified = -1
       this.attempts = (this.currentQuestion.answers.length > 1) ? this.currentQuestion.answers.length : 2
       this.tmpResponse = undefined
     },
@@ -111,6 +114,12 @@ export default {
     // EVENT RELATED FUNCTIONS
 
     onVerifyResponse: function (response) {
+      if (response.questionValid) {
+        this.isVerified = 1
+      } else {
+        this.isVerified = 0
+      }
+
       this.tmpResponse = response.questionResponse
     }
 
@@ -121,7 +130,7 @@ export default {
       return this.quiz.questions[this.questionId]
     },
     isDone: function () {
-      return this.isVerified || this.attempts <= 0
+      return this.isVerified === 1 || this.attempts <= 0
     }
   },
 
@@ -147,8 +156,7 @@ export default {
 
 <style lang="scss" scoped>
   .name {
-    text-transform: capitalize;
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .verifyer .aligner {

@@ -26,7 +26,7 @@
 
   #app{
     font-family: Nunito;
-    
+
     width: 100vw;
     height: 100vh;
 
@@ -69,7 +69,7 @@
   /* ################### */
   /*      BUTTONS        */
   /* ################### */
-  
+
   .button {
     position: relative;
     max-height: 64px;

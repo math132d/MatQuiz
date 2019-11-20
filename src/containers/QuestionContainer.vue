@@ -1,33 +1,18 @@
 <template>
-    <div>
-      <form class="question-container" :key="questionId" @submit.prevent="verifyQuestion()" autocomplete="off">
-        <div class="top">
-          <template v-for="(chunk, index) in question.sentence.split('_')" >
-            <question-input
-              v-if="index > 0"
-              ref="input"
+  <div>
+    <template v-for="(chunk, index) in question.sentence.split('_')" >
+      <question-input
+        v-if="index > 0"
+        ref="input"
 
-              :key="index"
-              :isDone="isDone"
-              :placeholder="question.placeholders[index-1]"
-              :answer="question.answers[index-1]"
-            />
-            {{chunk}}
-          </template>
-        </div>
-        <div class="bottom">
-          <a class="attempts" :class="{warning : (attempts <= 1)}"><span class="badge">{{attempts}}</span> Attempts</a>
-          <button type="submit" class="verify" >
-            <template v-if="isDone" >
-              <i class="material-icons">arrow_forward</i>
-            </template>
-            <template v-else >
-              <i class="material-icons">done</i>
-            </template>
-          </button>
-        </div>
-      </form>
-   </div>
+        :key="index"
+        :isDone="isDone"
+        :placeholder="question.placeholders[index-1]"
+        :answer="question.answers[index-1]"
+      />
+      {{chunk}}
+    </template>
+  </div>
 </template>
 
 <script>
@@ -36,79 +21,36 @@ import tools from '../lib/tools'
 
 export default {
 
-  inputId: 1,
-
-  data: function () {
-    return {
-      isVerified: false,
-      startTime: null,
-      attempts: 3
-    }
-  },
-
   props: [
     'question',
-    'questionId'
+    'questionId',
+    'isDone'
   ],
 
-  computed: {
-    isDone: function () {
-      return this.isVerified || this.attempts <= 0
-    }
-  },
-
   methods: {
-    verifyQuestion: function () {
-      if (this.isDone) {
-
-        const questionResponse = { //response data to be stored for grading
-          answers: this.$refs.input.map((input) => { return input.value }), //Users answers
-          remainingAttempts: this.attempts,
-          time: Date.now() - this.startTime //Time spent on question
-        }
-
-        this.$emit('next-question', questionResponse)
-      } else {
-        this.isVerified = this.verifyInputs()
-        if (!this.isVerified) this.attempts -= 1
-      }
-    },
-
-    verifyInputs: function () { // Returns true if all unputs are correct, false otherwise
+    verifyInputs: function () { // Emits true if all unputs are correct, false otherwise
       let questionValid = true
+      let questionResponse = []
 
       this.$refs.input.forEach((component, index) => {
         const inputValid = tools.compareStrings(component.value, this.question.answers[index])
+
+        questionResponse.push(component.value)
 
         if (!inputValid) { questionValid = false }
 
         component.setValid(inputValid)
       })
 
-      return questionValid
-    }
-  },
-
-  watch: {
-    questionId: function () {
-      this.startTime = Date.now()
-      this.isVerified = false
-      this.attempts = (this.question.answers.length > 1) ? this.question.answers.length : 2
+      this.$emit('verify-response', {
+        questionValid,
+        questionResponse
+      })
     }
   },
 
   components: {
     QuestionInput
-  },
-
-  created: function () {
-    this.inputId = 0
-    this.attempts = (this.question.answers.length > 1) ? this.question.answers.length : 2
-    this.startTime = Date.now()
-  },
-  
-  beforeUpdate: function () {
-    this.inputId = 0
   }
 }
 </script>

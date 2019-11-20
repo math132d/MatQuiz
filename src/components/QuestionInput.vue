@@ -51,16 +51,16 @@ export default {
   },
   computed: {
     isValid: function () {
-      if (this.validState >= 0) { //Has the input been modified? 
+      if (this.validState >= 0) { // Has the input been modified?
         return this.validState === 1 // Returns the valid state true : false
       } else {
         return null // Returns null if unmodified
       }
     },
-    inputWidth: function () { //Returns the length of either the placeholder or the answer, whichever is longest
+    inputWidth: function () { // Returns the length of either the placeholder or the answer, whichever is longest
       return (this.$props.placeholder.length > this.$props.answer.length) ? this.placeholder.length : this.answer.length
     },
-    firstAnswer: function () { //Returns the first correct answer if there are multiple correct answers
+    firstAnswer: function () { // Returns the first correct answer if there are multiple correct answers
       return Array.isArray(this.answer) ? this.answer[0] : this.answer
     }
   }

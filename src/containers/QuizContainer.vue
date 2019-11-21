@@ -1,5 +1,5 @@
 <template>
-  <div class="fill aligner aligner--col aligner--space">
+  <div class="quiz fill aligner aligner--col aligner--space">
 
     <div class="name container container--top px-2 aligner aligner--row aligner--space" >
       <span>{{ `${this.questionId} / ${this.quiz.questions.length-1}` }}</span>
@@ -157,6 +157,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .quiz {
+    overflow: hidden;
+  }
+
   .name {
     font-weight: 400;
   }

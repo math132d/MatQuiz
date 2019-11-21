@@ -1,0 +1,23 @@
+{
+    "short_name": "Quizz",
+    "name": "Matt's Quizz app",
+    "icons": [
+      {
+        "src": "/icons/icon.png",
+        "type": "image/png",
+        "sizes": "64x64"
+      },
+      {
+        "src": "/icons/icon@2x.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#5F5E59",
+    "orientation": "portrait",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3BB273"
+  }
+  

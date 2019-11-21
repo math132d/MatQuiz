@@ -6,19 +6,21 @@
       <span style="margin-left: 24px"> {{ _quiz_id.replace(/_/g, " ") }} </span>
     </div>
 
-    <div v-if="isLoading || !isOk"><p>Loading</p></div>
-    <question-container
-      v-else
+    <transition name="slide" mode="out-in">
+      <div v-if="isLoading || !isOk"><p>Loading</p></div>
+      <question-container
+        v-else
 
-      v-on:verify-response="onVerifyResponse"
+        v-on:verify-response="onVerifyResponse"
 
-      ref="questionContainer"
+        ref="questionContainer"
 
-      :key="questionId"
-      :isDone="isDone"
-      :question="currentQuestion"
-      :questionId="questionId"
-    />
+        :key="questionId"
+        :isDone="isDone"
+        :question="currentQuestion"
+        :questionId="questionId"
+      />
+    </transition>
 
     <div class="aligner aligner--row" style="padding: 8px;">
 
@@ -180,5 +182,27 @@ export default {
 
   .verifyer .secondary strong{
     font-weight: 600;
+  }
+
+  .slide-enter-active, .slide-leave-active {
+    opacity: 1;
+  }
+
+  .slide-enter-active {
+    transition: all 0.25s ease-out;
+  }
+
+  .slide-leave-active {
+    transition: all 0.25s ease-in;
+  }
+
+  .slide-enter {
+    transform: translate(64px, 0);
+    opacity: 0;
+  }
+
+  .slide-leave-to {
+    transform: translate(-64px, 0);
+    opacity: 0;
   }
 </style>

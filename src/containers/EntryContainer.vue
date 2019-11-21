@@ -1,6 +1,8 @@
 <template>
     <div class="aligner fill">
-        <find-quiz-container v-if="findActive"/>
+        <transition name="slide">
+          <find-quiz-container v-if="findActive"/>
+        </transition>
         <div class="aligner aligner--row" :class="{ blur : (findActive || createActive) }">
             <button @click="onFindClick" class="button button-primary aligner aligner--col">
               <img src="/images/undraw_searching_p5ux.svg" alt="Searching">
@@ -57,6 +59,16 @@ export default {
     button p {
       font-size: 1.2rem;
       font-weight: 600;
+    }
+
+    .slide-enter-active, .slide-leave-active {
+      transition: all 0.25s ease-in-out;
+      opacity: 1;
+    }
+
+    .slide-enter, .slide-leave-to {
+      transform: translate(0, -100%);
+      opacity: 0;
     }
 
 </style>

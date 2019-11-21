@@ -6,16 +6,16 @@
     },
     {
         "sentence": "Derefter laver han _ til _ familie.",
-        "answers": ["morgenmad", "hans"],
+        "answers": ["morgenmad", "sin"],
         "placeholders": ["breakfast", "his"]
     },
     {
-        "sentence": "Jes har _ børn. En pige og en dreng. _ hedder Lise og _ hedder Mads.",
+        "sentence": "Jes har _ børn. En pige og en dreng. _ hedder Nina og _ hedder Mads.",
         "answers": ["to", "pigen", "drengen"],
         "placeholders": ["two", "the girl", "the boy"]
     },
     {
-        "sentence": "“ _ !” siger han når han vækker dem, _ er serveret”.",
+        "sentence": "“_!” siger han når han vækker dem, _ er serveret”.",
         "answers": ["godmorgen", "morgenmaden"],
         "placeholders": ["good morning", "the breakfast"]
     },
@@ -25,22 +25,22 @@
         "placeholders": ["he", "the eggs"]
     },
     {
-        "sentence": "I dag skal de i zoo og se vilde _ . Lise elsker _ så hun vil gerne se Zebraerne, mens Mads meget hellere vil se _ .",
+        "sentence": "I dag skal de i zoo og se vilde _. Nina elsker _ så hun vil gerne se Zebraerne, mens Mads meget hellere vil se _.",
         "answers": ["dyr", "heste", "løver"],
         "placeholders": ["animals", "horses", "lions"]
     },
     {
-        "sentence": "På vej hen til _ går de forbi indhegningen med _ . Lise siger hun har set en elefant være bange for en _ på TV.",
+        "sentence": "På vej hen til _ går de forbi indhegningen med _. Nina siger hun har set en elefant være bange for en _ på TV.",
         "answers": ["løverne", "elefanter", "mus"],
         "placeholders": ["the lions", "elefants", "mouse"]
     },
     {
-        "sentence": "Efter løverne vil Lise se en _ , men før de kan se Zebraerne skal de først have _ . Mads vil gerne have _ til frokost, men det syntes Jes ikke de skal.",
+        "sentence": "Efter løverne vil Nina se en _, men før de kan se Zebraerne skal de først have _. Mads vil gerne have _ til frokost, men det syntes Jes ikke de skal.",
         "answers": ["zebra", "frokost", "kage"],
         "placeholders": ["zebra", "lunch", "cake"]
     },
     {
-        "sentence": "Lise tager en nogle _ med til Zebraerne, hun ved nemlig at de er _ .",
+        "sentence": "Nina tager nogle _ med til Zebraerne, hun ved nemlig at de er _.",
         "answers": ["tomater", "vegetarer"],
         "placeholders": ["tomatoes", "vegetarians"]
     },
@@ -50,7 +50,7 @@
         "placeholders": ["goodbye", "the animals"]
     },
     {
-        "sentence": "Jes siger _ til både Mads og Lise. Inden de falder i søvn kan de høre en _ tude i natten.",
+        "sentence": "Jes siger _ til både Mads og Nina. Inden de falder i søvn kan de høre en _ tude i natten.",
         "answers": ["godnat", "ugle"],
         "placeholders": ["goodnight", "owl"]
     }

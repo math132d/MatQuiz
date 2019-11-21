@@ -2,7 +2,7 @@
     <div class="popover container aligner">
         <input class="input input-sm" placeholder="quiz id" type="text" v-model="inputValue">
         <button class="aligner button button-sm button-primary" @click="routeToQuiz(inputValue)" >
-          <i class="material-icons">arrow_forward</i>
+          <i class="material-icons">search</i>
         </button>
     </div>
 </template>

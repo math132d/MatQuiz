@@ -1,10 +1,16 @@
 <template>
-    <div class="aligner aligner--col fill">
-        <div :class="{ blur : (findActive || createActive) }">
-            <button @click="onFindClick" class="big-button"> Find Quiz</button>
-            <button class="big-button" disabled> Create Quiz</button>
-        </div>
+    <div class="aligner fill">
         <find-quiz-container v-if="findActive"/>
+        <div class="aligner aligner--row" :class="{ blur : (findActive || createActive) }">
+            <button @click="onFindClick" class="button button-primary aligner aligner--col">
+              <img src="/images/undraw_searching_p5ux.svg" alt="Searching">
+              <p>Search</p>
+            </button>
+            <button class="button button-secondary aligner aligner--col" disabled>
+              <img src="/images/undraw_typewriter_i8xd.svg" alt="Typewriter">
+              <p>Create</p>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -36,42 +42,21 @@ export default {
 <style lang="scss" scoped>
     @import "../assets/scss/const.scss";
 
-    div {
-        transition: all 0.2s;
+    img {
+      width: 96px;
+      margin-bottom: 16px;
     }
 
-    .blur {
-        opacity: 0.3;
+    button {
+      width: 128px;
+      height: 128px;
+      max-height: none;
+      border-radius: 16px;
     }
 
-    .big-button {
-        width: 5rem;
-        height: 5rem;
-
-        margin: 1rem;
-
-        color: $text;
-        font-size: 1.2rem;
-        font-family: inherit;
-
-        border: solid $positive 1px;
-        border-radius: 5px;
-        background: rgba($positive, .05);
-    }
-
-    .big-button:disabled {
-        border: solid $foreground 1px;
-        border-radius: 5px;
-        background: rgba($foreground, .05);
-    }
-
-    .big-button:hover:enabled, .big-button:focus:enabled{
-        border-width: 2px;
-        background: rgba($positive, .1);
-    }
-
-    .big-button:active:enabled{
-        background: rgba($positive, .2);
+    button p {
+      font-size: 1.2rem;
+      font-weight: 600;
     }
 
 </style>

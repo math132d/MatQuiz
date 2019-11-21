@@ -138,10 +138,24 @@ export default {
     outline-style: none;
   }
 
+  .button-sm {
+    font-size: 1rem;
+    max-height: 40px;
+  }
+
+  .button-sm i {
+    font-size: 1rem;
+  }
+
   .button-primary {
     z-index: 1;
     background: linear-gradient(to right, $primary-600, $primary-500);
     color: $primary-100;
+  }
+
+  .button-primary:disabled {
+    background: linear-gradient(to right, $primary-500, $primary-400);
+    filter: saturate(0%);
   }
 
   .button-primary::before {
@@ -166,14 +180,15 @@ export default {
     opacity: 1;
   }
 
-  .button-primary:disabled {
-    background: linear-gradient(to right, $primary-500, $primary-400);
-  }
-
   .button-secondary {
     z-index: 1;
     background: linear-gradient(to right, $gray-700, $gray-600);
     color: $gray-100;
+  }
+
+  .button-secondary:disabled {
+    background: linear-gradient(to right, $gray-500, $gray-400);
+    filter: saturate(0%);
   }
 
   .button-secondary::before {
@@ -193,8 +208,8 @@ export default {
     z-index: -1;
   }
 
-  .button-secondary:hover::before,
-  .button-secondary:focus::before {
+  .button-secondary:hover:enabled::before,
+  .button-secondary:focus:enabled::before {
     opacity: 1;
   }
 
@@ -224,6 +239,30 @@ export default {
   .button-warning:hover::before,
   .button-warning:focus::before {
     opacity: 1;
+  }
+
+  /* ################### */
+  /*      INPUT          */
+  /* ################### */
+
+  .input {
+    max-height: 64px;
+    margin: 8px;
+
+    font-family: Nunito;
+    font-size: 1.8rem;
+
+    background-color: $gray-200;
+    color: $gray-700;
+
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .input-sm {
+    font-size: 1rem;
+    max-height: 40px;
   }
 
   /* ################### */

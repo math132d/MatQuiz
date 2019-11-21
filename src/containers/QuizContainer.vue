@@ -159,10 +159,14 @@ export default {
     font-weight: 400;
   }
 
+  .verifyer {
+    margin-right: 16px;
+  }
+
   .verifyer .aligner {
     align-items: flex-start;
     line-height: 1.1;
-    margin: 8px;
+    margin: auto 8px;
   }
 
   .verifyer .primary {

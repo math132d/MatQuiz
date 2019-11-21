@@ -4,6 +4,20 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  metaInfo: {
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'google', content: 'notranslate' },
+      { name: 'viewport', content: `width=411, initial-scale=${screen.width / 411}, user-scalable=no` }
+    ],
+    title: 'Quizz'
+  }
+}
+</script>
+
 <style lang="scss">
 
   @import "./assets/scss/const.scss";

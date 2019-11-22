@@ -18,12 +18,12 @@ export default {
     }
   },
 
-  metaInfo: function() {
+  metaInfo: function () {
     return {
       meta: [
         { charset: 'utf-8' },
         { name: 'google', content: 'notranslate' },
-        { name: 'viewport', content: this.getViewportContent()}
+        { name: 'viewport', content: this.getViewportContent() }
       ],
 
       title: 'Quizz'
@@ -154,7 +154,10 @@ export default {
   }
 
   .button-primary:disabled {
-    background: linear-gradient(to right, $primary-500, $primary-400);
+    background: linear-gradient(to right, $primary-400, $primary-300);
+  }
+
+  .button-primary:disabled i {
     filter: saturate(0%);
   }
 

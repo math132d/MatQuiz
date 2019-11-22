@@ -65,6 +65,7 @@ export default {
 
   .question {
     text-align: center;
+    max-width: 600px;
     line-height: 1.5;
     font-size: 1.5rem;
   }

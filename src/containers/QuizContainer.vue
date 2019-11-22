@@ -6,11 +6,16 @@
       <span style="margin-left: 24px"> {{ _quiz_id.replace(/_/g, " ") }} </span>
     </div>
 
-    <transition name="slide" mode="out-in">
-      <div v-if="isLoading || !isOk"><p>Loading</p></div>
+    <div v-if="isLoading || !isOk"><p>Loading</p></div>
+    <transition v-else name="slide" mode="out-in">
+      <result-container
+        v-if="showResults"
+
+        :quiz="quiz"
+        :quizResponse="quizResponse"
+      />
       <question-container
         v-else
-
         v-on:verify-response="onVerifyResponse"
 
         ref="questionContainer"
@@ -47,6 +52,7 @@
 
 <script>
 import QuestionContainer from '../containers/QuestionContainer'
+import ResultContainer from '../containers/ResultContainer'
 
 export default {
   props: [
@@ -65,6 +71,7 @@ export default {
       startTime: null,
       attempts: 3,
 
+      showResults: false,
       tmpResponse: undefined
     }
   },
@@ -82,7 +89,7 @@ export default {
       if (this.questionId < this.quiz.questions.length - 1) {
         this.questionId++
       } else {
-        this.$router.replace({ name: 'result', params: { _quiz_id: this.$props._quiz_id } }) // Doesn't work no more, result should be shown conditionally
+        this.showResults = true;
       }
     },
 
@@ -143,7 +150,8 @@ export default {
   },
 
   components: {
-    QuestionContainer
+    QuestionContainer,
+    ResultContainer
   },
 
   created: async function () {

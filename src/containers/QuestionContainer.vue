@@ -51,7 +51,15 @@ export default {
         questionValid,
         questionResponse
       })
+    },
+    focusFirst: function() {
+      console.log("woo 2")
+      this.$refs.input[0].$refs.input.focus()
     }
+  },
+
+  mounted: function() {
+    this.focusFirst();
   },
 
   components: {

@@ -13,6 +13,8 @@
             name="answer"
             type="text"
 
+            ref="input"
+
             v-else
             v-model="value"
 

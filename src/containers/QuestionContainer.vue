@@ -52,14 +52,13 @@ export default {
         questionResponse
       })
     },
-    focusFirst: function() {
-      console.log("woo 2")
+    focusFirst: function () {
       this.$refs.input[0].$refs.input.focus()
     }
   },
 
-  mounted: function() {
-    this.focusFirst();
+  mounted: function () {
+    this.focusFirst()
   },
 
   components: {

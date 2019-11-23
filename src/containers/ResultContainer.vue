@@ -118,7 +118,7 @@ export default {
 
     h1 {
       font-size: 2.5rem;
-      font-weight: 600;  
+      font-weight: 600;
     }
 
     .result {
@@ -173,5 +173,5 @@ export default {
         transform: scale(1.05)
       }
     }
-  
+
 </style>

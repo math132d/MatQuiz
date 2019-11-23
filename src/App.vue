@@ -222,6 +222,14 @@ export default {
     color: $warning-100;
   }
 
+  .button-warning:disabled {
+    background: linear-gradient(to right, $warning-400, $warning-300);
+  }
+
+  .button-warning:disabled i {
+    filter: saturate(0%);
+  }
+
   .button-warning::before {
     content: "";
     position: absolute;
@@ -239,8 +247,8 @@ export default {
     z-index: -1;
   }
 
-  .button-warning:hover::before,
-  .button-warning:focus::before {
+  .button-warning:hover:enabled::before,
+  .button-warning:focus:enabled::before {
     opacity: 1;
   }
 

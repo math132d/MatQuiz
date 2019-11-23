@@ -160,7 +160,8 @@ export default {
     }
 
     .grade-visual text {
-        font-weight: bold;
+        font-weight: 600;
+        fill: $gray-700;
         font-size: 2.5rem;
     }
 

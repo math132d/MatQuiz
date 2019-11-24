@@ -16,11 +16,11 @@
             <div class="score aligner aligner--col" >
               <p>
                 <b>
-                  {{ `${attemptRatio.remainingAttempts} / ${attemptRatio.maxAttempts}` }}
+                  {{ `${getAnswerStats().correct} / ${getAnswerStats().length}` }}
                 </b>
               </p>
-              <small>Attempts</small>
-              <small>Remaining</small>
+              <small>Correct</small>
+              <small>Answers</small>
             </div>
         </div>
     </div>
@@ -40,9 +40,15 @@ export default {
   },
 
   methods: {
-    getDashOffset: function () {
-      let { maxAttempts, remainingAttempts } = this.attemptRatio
-      return 283 - ((remainingAttempts / maxAttempts) * 283)
+    getDashOffset: function (percent) {
+      return 283 - (percent * 283)
+    },
+
+    getGrade: function (percent) {
+      const grades = ['A+', 'A', 'B+', 'B', 'C', 'D', 'F']
+      const step = 6 - Math.floor(Math.pow(percent, 3) * 6)
+
+      return grades[step]
     },
 
     getAnswerStats: function () {
@@ -63,6 +69,7 @@ export default {
       })
 
       return {
+        length: correct + incorrect + unanswered,
         correct,
         incorrect,
         unanswered
@@ -80,12 +87,10 @@ export default {
 
   computed: {
     grade: function () {
-      const { maxAttempts, remainingAttempts } = this.attemptRatio
-      const percent = remainingAttempts / maxAttempts
-      const grades = ['A+', 'A', 'B+', 'B', 'C', 'D', 'F']
-      const step = 6 - Math.floor(Math.pow(percent, 3) * 6)
-
-      return grades[step]
+      const { correct, length } = this.getAnswerStats()
+      return this.getGrade(
+        correct / length
+      )
     },
     attemptRatio: function () {
       let maxAttempts = this.quiz.questions.reduce((total, current) => {
@@ -107,7 +112,10 @@ export default {
 
   created: function () {
     setTimeout(() => {
-      this.dashOffset = this.getDashOffset()
+      const { correct, length } = this.getAnswerStats()
+      this.dashOffset = this.getDashOffset(
+        correct / length
+      )
     }, 1000)
   }
 }

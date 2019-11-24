@@ -2,8 +2,8 @@
   <div class="quiz fill aligner aligner--col aligner--space">
 
     <div class="name container container--top px-2 aligner aligner--row aligner--space" >
-      <span>{{ `${this.questionId} / ${this.quiz.questions.length-1}` }}</span>
-      <span style="margin-left: 24px"> {{ _quiz_id.replace(/_/g, " ") }} </span>
+      <span>{{ `${this.questionId+1} / ${this.quiz.questions.length}` }}</span>
+      <span style="margin-left: 24px"> {{ this.quiz.title || _quiz_id }} </span>
     </div>
 
     <div v-if="isLoading || !isOk"><p>Loading</p></div>

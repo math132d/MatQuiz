@@ -35,6 +35,17 @@ export default {
       }
     }
   },
+
+  created: function() {
+    document.addEventListener("mousedown", event => {
+      this.findActive = false;
+    });
+  },
+
+  beforeDestroy: function() {
+    document.removeEventListener("mousedown")
+  },
+
   components: {
     FindQuizContainer
   }

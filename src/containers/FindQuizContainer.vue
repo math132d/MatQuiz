@@ -1,5 +1,5 @@
 <template>
-    <div class="popover container aligner">
+    <div class="popover container aligner" @mousedown.stop>
         <input class="input input-sm" placeholder="quiz id" type="text" v-model="inputValue">
         <button class="aligner button button-sm button-primary" @click="routeToQuiz(inputValue)" >
           <i class="material-icons">search</i>

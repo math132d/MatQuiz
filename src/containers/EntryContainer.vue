@@ -1,5 +1,5 @@
 <template>
-    <div class="aligner fill">
+    <div class="aligner aligner--col fill">
         <transition name="slide">
           <find-quiz-container v-if="findActive"/>
         </transition>

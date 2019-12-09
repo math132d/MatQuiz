@@ -1,8 +1,8 @@
 <template>
     <div class="popover search" @mousedown.stop>
         <div class="suggestions aligner aligner--col">
-          <a class="aligner aligner--row" v-for="(el, index) in suggestions" :key="index" href="#">
-            <span>{{el}}</span>
+          <a class="aligner aligner--row" v-for="(el, index) in suggestions" :key="index" href="#" @click.stop="routeToQuiz(el.url)">
+            <span>{{el.title}}</span>
             <i class="material-icons">arrow_forward</i>
           </a>
         </div>
@@ -14,7 +14,6 @@
 export default {
   data: function () {
     return {
-      suggestions: ["test", "test"],
       inputValue: ''
     }
   },
@@ -27,13 +26,13 @@ export default {
     fetchSuggestions: async function (event) {
       const url = `http://${process.env.VUE_APP_HOST}:${process.env.VUE_APP_PORT}/suggestion`
 
-      try{
+      try {
         const response = await fetch(url)
         const json = await response.json()
-        
+
         this.suggestions = json.suggestions
-      }catch(e){
-        console.log("err" + e)
+      } catch (e) {
+        console.log('err' + e)
       }
     }
   }
@@ -46,6 +45,8 @@ export default {
   .search {
     background-color: $gray-100;
     border-radius: 8px;
+
+    box-shadow: 0px -1px 8px rgba(0,0,0,0.1);
 
     align-content: stretch;
   }

@@ -1,7 +1,7 @@
 <template>
     <div class="aligner aligner--col fill">
         <transition name="slide">
-          <find-quiz-container v-if="findActive"/>
+          <find-quiz-container v-show="findActive"/>
         </transition>
         <div class="aligner aligner--row" :class="{ blur : (findActive || createActive) }">
             <button @click="onFindClick" class="button button-primary aligner aligner--col">
@@ -36,14 +36,14 @@ export default {
     }
   },
 
-  created: function() {
-    document.addEventListener("mousedown", event => {
-      this.findActive = false;
-    });
+  created: function () {
+    document.addEventListener('mousedown', event => {
+      this.findActive = false
+    })
   },
 
-  beforeDestroy: function() {
-    document.removeEventListener("mousedown")
+  beforeDestroy: function () {
+    document.removeEventListener('mousedown')
   },
 
   components: {

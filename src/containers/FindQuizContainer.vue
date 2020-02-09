@@ -14,7 +14,8 @@
 export default {
   data: function () {
     return {
-      inputValue: ''
+      inputValue: '',
+      suggestions: {}
     }
   },
   methods: {

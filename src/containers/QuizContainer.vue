@@ -108,7 +108,7 @@ export default {
     },
 
     fetchQuiz: async function () {
-      const url = `questions/${this._quiz_id}.json`
+      const url = new URL(`quiz/${this._quiz_id}`, process.env.VUE_APP_HOST)
       console.log(`Fetching quiz from: ${url}`)
       const response = await fetch(url)
 

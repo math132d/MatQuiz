@@ -27,6 +27,8 @@ export default {
     fetchSuggestions: async function (event) {
       const url = new URL(`/suggestion?value=${this.inputValue}`, process.env.VUE_APP_HOST)
 
+      console.log(`Fetching suggestions from: ${url}`)
+
       try {
         const response = await fetch(url)
         const json = await response.json()

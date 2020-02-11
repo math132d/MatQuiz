@@ -3,12 +3,12 @@
     "name": "Matt's Quizz app",
     "icons": [
       {
-        "src": "/icons/icon.png",
+        "src": "/images/icon.png",
         "type": "image/png",
         "sizes": "64x64"
       },
       {
-        "src": "/icons/icon@2x.png",
+        "src": "/images/icon@2x.png",
         "type": "image/png",
         "sizes": "128x128"
       }

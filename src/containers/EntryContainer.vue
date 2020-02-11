@@ -41,7 +41,7 @@ export default {
       this.findActive = false
     })
   },
-  
+
   components: {
     FindQuizContainer
   }

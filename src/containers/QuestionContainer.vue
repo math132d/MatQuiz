@@ -5,16 +5,17 @@
     </div>
     <div class="question container p-2" >
       <template v-for="(chunk, index) in question.sentence.split('_')" >
-        <question-input
-          v-if="index > 0"
-          ref="input"
+        <span :key="index" >
+          <question-input
+            v-if="index > 0"
+            ref="input"
 
-          :key="index"
-          :isDone="isDone"
-          :placeholder="question.placeholders[index-1]"
-          :answer="question.answers[index-1]"
-        />
-        {{chunk}}
+            :isDone="isDone"
+            :placeholder="question.placeholders[index-1]"
+            :answer="question.answers[index-1]"
+          />
+          <span class="line_break">{{ chunk }}</span>
+        </span>
       </template>
     </div>
   </div>
@@ -69,6 +70,10 @@ export default {
 
 <style lang="scss" scoped>
   @import 'src/assets/scss/const.scss';
+
+  .line_break {
+    white-space: pre-line
+  }
 
   .question {
     text-align: center;

@@ -51,6 +51,9 @@ export default {
 
     box-shadow: 0px -1px 8px rgba(0,0,0,0.1);
 
+    width: 95%;
+    max-width: 24rem;
+
     align-content: stretch;
   }
 
@@ -84,11 +87,19 @@ export default {
 
   .search .suggestions a span {
     margin-right: auto;
+
+    white-space: nowrap;
+    overflow-x: hidden;
   }
 
   .search input {
     margin: 0;
+
+    width: 100%;
+    max-width: 24rem;
+
     box-shadow: 0px -1px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
     background: $gray-100;
   }
 

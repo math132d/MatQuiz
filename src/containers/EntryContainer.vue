@@ -41,11 +41,7 @@ export default {
       this.findActive = false
     })
   },
-
-  beforeDestroy: function () {
-    document.removeEventListener('mousedown')
-  },
-
+  
   components: {
     FindQuizContainer
   }

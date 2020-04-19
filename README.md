@@ -8,11 +8,11 @@ A Single Page Application for answering fill-in-the-blank style questions. With 
 
 ## What it does
 
-1. Constructs quizzez from a single json file
+- Constructs quizzez from a single json file
   - A quiz contains many questions, each with a seperate "page"
-2. Provides feedback to the user whether the answers given for a question is correct.
-3. Provides a grade upon completion of a quiz.
-4. Allows searching for quizzez availible.
+- Provides feedback to the user whether the answers given for a question is correct.
+- Provides a grade upon completion of a quiz.
+- Allows searching for quizzez availible.
   - Gives relevant suggestions as you type.
 
 ## How does it work

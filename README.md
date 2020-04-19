@@ -6,6 +6,51 @@ A Single Page Application for answering fill-in-the-blank style questions. With 
 
 ![Question Mistake](/demo/example_mistake.jpg) ![Question Correct](/demo/example_correct.jpg) ![Question Grade](/demo/example_grade.jpg)
 
-A Quiz is constructed from a single JSON file containing a list of questions. Each question contains the question text itself along with the correct answer, of which there can be multiple for each blank, and an optional placeholder text.
+## What it does
+
+1. Constructs quizzez from a single json file
+  - A quiz contains many questions, each with a seperate "page"
+2. Provides feedback to the user whether the answers given for a question is correct.
+3. Provides a grade upon completion of a quiz.
+4. Allows searching for quizzez availible.
+  - Gives relevant suggestions as you type.
+
+## How does it work
+
+The site was built in vue as a learning exercise. The goal was to learn how to use a modern framework for building single page applications.
+
+### Constructing the quizzes
+
+Each quiz is constructed from a single JSON file containing a list of questions. Each question contains the question text itself along with the correct answer, of which there can be multiple for each blank, and an optional placeholder text.
 
 The Application keeps track of correct anwers for each question and will grade the Quiz upon completion.
+
+The following is an examaple of a json file containing a quiz.
+
+```json
+{
+    "title":"Animals and Definite",
+    "description":"...",
+    "questions": [
+      {
+        "sentence": "Jes står op om _ og fodrer sine _ masser af mad.",
+        "answers": ["morgenen", "kyllinger"],
+        "placeholders": ["the morning", "chickens"]
+      },
+      {
+          "sentence": "Derefter laver han _ til _ familie.",
+          "answers": ["morgenmad", "sin"],
+          "placeholders": ["breakfast", "his"]
+      },
+      {
+          "sentence": "Jes har _ børn. En pige og en dreng. _ hedder Nina og _ hedder Mads.",
+          "answers": ["to", "pigen", "drengen"],
+          "placeholders": ["two", "the girl", "the boy"]
+      }
+    ]
+}
+```
+
+### Backend - Serving quizzez and search suggestions
+
+The backend for serving search suggestions was build in nodejs, using express. This is not an optimal implementation and is on my wishlist for improvement if I get back to this project.

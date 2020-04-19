@@ -8,14 +8,14 @@ A Single Page Application for answering fill-in-the-blank style questions. With 
 
 ## What it does
 
-- Constructs quizzez from a single json file
-  - A quiz contains many questions, each with a seperate "page"
-- Provides feedback to the user whether the answers given for a question is correct.
+- Constructs quizzes from a single json file
+  - A quiz contains many questions, each with a separate "page"
+- Provides feedback to the user whether the answers given for a question are correct.
 - Provides a grade upon completion of a quiz.
-- Allows searching for quizzez availible.
+- Allows searching for available quizzes.
   - Gives relevant suggestions as you type.
 
-## How does it work
+## How it works
 
 The site was built in vue as a learning exercise. The goal was to learn how to use a modern framework for building single page applications.
 
@@ -51,6 +51,6 @@ The following is an examaple of a json file containing a quiz.
 }
 ```
 
-### Backend - Serving quizzez and search suggestions
+### Backend - Serving quizzes and search suggestions
 
 The backend for serving search suggestions was build in nodejs, using express. This is not an optimal implementation and is on my wishlist for improvement if I get back to this project.

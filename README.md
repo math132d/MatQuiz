@@ -2,8 +2,6 @@
 
 A Single Page Application for answering fill-in-the-blank style questions. With a clean interface designed for phones first.
 
-#### Try a live demo at [http://quiz.thestaticcow.dk/](http://quiz.thestaticcow.dk/#/quiz/animals_and_definite.json)
-
 ![Question Mistake](/demo/example_mistake.jpg) ![Question Correct](/demo/example_correct.jpg) ![Question Grade](/demo/example_grade.jpg)
 
 ## What it does
